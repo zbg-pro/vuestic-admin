@@ -1,6 +1,8 @@
 <template>
   <div>
     <data-table-actions class="mb-8" />
+    <hr />
+    sdfsdf
     <data-table-sorting-pagination class="mb-8" />
     <data-table-filter class="mb-8" />
     <data-table-infinite-scroll class="mb-8" />
@@ -24,13 +26,13 @@
   export default {
     components: {
       DataTableActions,
-      DataTableSortingPagination,
-      DataTableFilter,
-      DataTableInfiniteScroll,
-      DataTableSelect,
-      DataTableServerPagination,
-      DataTableEmpty,
-      DataTableLoading,
+      //DataTableSortingPagination,
+      //DataTableFilter,
+      //DataTableInfiniteScroll,
+      //DataTableSelect,
+      //DataTableServerPagination,
+      //DataTableEmpty,
+      //DataTableLoading,
     },
   }
 </script>

@@ -1,69 +1,103 @@
 <template>
-  <va-card :title="t('tables.labelsActions')">
-    <va-data-table :fields="fields" :data="users" no-pagination>
-      <template #marker="props">
-        <va-icon name="fa fa-circle" :color="props.rowData.color" size="8px" />
-      </template>
+  <va-card class="markup-tables mb-8">
+    <va-card-title>{{ t('tables.basic') }}</va-card-title>
+    <va-card-content class="overflow-auto">
+      <table class="va-table w-full">
+        <thead>
+          <tr>
+            <th>{{ t('tables.headings.name') }}</th>
+            <th>{{ t('tables.headings.email') }}</th>
+            <th>{{ t('tables.headings.country') }}</th>
+            <th>{{ t('tables.headings.status') }}</th>
+          </tr>
+        </thead>
 
-      <template #actions="props">
-        <va-button preset="plain" small color="gray" class="m-0" @click="edit(props.rowData)">
-          {{ t('tables.edit') }}
-        </va-button>
+        <tbody>
+          <tr v-for="user in users" :key="user.id">
+            <td>{{ user.name }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.country }}</td>
+            <td>
+              <va-badge :text="user.status" :color="getStatusColor(user.status)" />
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </va-card-content>
+  </va-card>
 
-        <va-button preset="plain" small color="danger" class="m-0" @click="remove(props.rowData)">
-          {{ t('tables.delete') }}
-        </va-button>
-      </template>
-    </va-data-table>
+  <va-card>
+    <va-card-title>{{ t('tables.stripedHoverable') }}</va-card-title>
+    <va-card-content class="overflow-auto">
+      <table class="va-table va-table--striped va-table--hoverable w-full">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Country</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr v-for="user in users" :key="user.id">
+            <td>{{ user.name }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.country }}</td>
+            <td>
+              <va-badge :text="user.status" :color="getStatusColor(user.status)" />
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </va-card-content>
   </va-card>
 </template>
 
-<script>
-  import users from '../data/users.json'
+<script setup lang="ts">
+  import { onMounted, ref } from 'vue'
+  import { useI18n } from 'vue-i18n'
+  import axios from 'axios'
+  import data from '../../../../../data/tables/markup-table/data.json'
 
-  export default {
-    data() {
-      return {
-        users: users.slice(0, 6),
-      }
-    },
-    computed: {
-      fields() {
-        return [
-          {
-            name: '__slot:marker',
-            width: '30px',
-            dataClass: 'text-center',
-          },
-          {
-            name: 'fullName',
-            title: this.t('tables.headings.name'),
-          },
-          {
-            name: 'email',
-            title: this.t('tables.headings.email'),
-          },
-          {
-            name: 'country',
-            title: this.t('tables.headings.country'),
-          },
-          {
-            name: '__slot:actions',
-            dataClass: 'va-text-right',
-          },
-        ]
-      },
-    },
-    methods: {
-      edit(user) {
-        alert('Edit User: ' + JSON.stringify(user))
-      },
-      remove(user) {
-        const idx = this.users.findIndex((u) => u.id === user.id)
-        this.users.splice(idx, 1)
-      },
-    },
+  const { t } = useI18n()
+
+  const params = {
+    per_page: 1,
+    page: 10,
+  }
+  var users = ref(data.slice(0, 8))
+
+  /*
+axios.get('https://reqres.in/api/users', { params }).then((response) => {
+  users = response.data.data
+  console.log(users)
+  //params.totalPages = response.data.total_pages
+  //this.loading = false
+})
+*/
+
+  onMounted(async () => {
+    try {
+      const response = await axios.get('https://reqres.in/api/users', { params })
+      users.value = response.data.data
+      console.log(users.value)
+      // params.totalPages = response.data.total_pages
+      // this.loading = false
+    } catch (error) {
+      console.error('Error fetching data:', error)
+    }
+  })
+
+  function getStatusColor(status: string) {
+    if (status === 'paid') {
+      return 'success'
+    }
+
+    if (status === 'processing') {
+      return 'info'
+    }
+
+    return 'danger'
   }
 </script>
-
-<style lang="scss"></style>

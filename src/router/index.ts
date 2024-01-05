@@ -23,6 +23,11 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import('../pages/admin/dashboard/Dashboard.vue'),
       },
       {
+        name: 'dashboard1',
+        path: 'dashboard1',
+        component: () => import('../pages/admin/dashboard/table.vue'),
+      },
+      {
         name: 'statistics',
         path: 'statistics',
         component: RouteViewComponent,
@@ -133,7 +138,7 @@ const routes: Array<RouteRecordRaw> = [
             path: 'data',
             component: () => import('../pages/admin/tables/data-tables/DataTables.vue'),
             meta: {
-              wikiLink: 'https://github.com/epicmaxco/vuestic-admin/wiki/Tables',
+              //wikiLink: 'https://github.com/epicmaxco/vuestic-admin/wiki/Tables',
             },
           },
         ],

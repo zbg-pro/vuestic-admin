@@ -19,6 +19,13 @@ export default {
       },
     },
     {
+      name: 'dashboard1',
+      displayName: 'menu.dashboard',
+      meta: {
+        icon: 'vuestic-iconset-dashboard',
+      },
+    },
+    {
       name: 'statistics',
       displayName: 'menu.statistics',
       meta: {
@@ -65,10 +72,10 @@ export default {
           name: 'markup',
           displayName: 'menu.markupTables',
         },
-        // {
-        //   name: 'data',
-        //   displayName: 'menu.dataTables',
-        // },
+        {
+          name: 'data',
+          displayName: 'menu.dataTables',
+        },
       ],
     },
     {
