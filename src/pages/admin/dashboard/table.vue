@@ -38,6 +38,12 @@
     per_page: 10,
     page: 1,
   }
+
+  console.log('1--' + import.meta.env.VITE_APP_GTM_KEY1)
+  console.log('2--' + import.meta.env.DEV)
+  console.log('3--' + import.meta.env.VITE_BACKEND_API_DOMAIN)
+  console.log('4--' + import.meta.env.VITE_BACKEND_VIP_DOMAIN)
+
   console.log(222)
   var users = ref([])
   onMounted(async () => {

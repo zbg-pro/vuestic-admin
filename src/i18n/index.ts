@@ -9,6 +9,8 @@ Object.entries(fileNameToLocaleModuleDict)
     const fileNameWithoutPath = fileNameParts[fileNameParts.length - 1]
     const localeName = fileNameWithoutPath.split('.json')[0]
 
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     return [localeName, localeModule.default]
   })
   .forEach((localeNameLocaleMessagesTuple) => {
