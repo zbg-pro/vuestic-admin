@@ -64,6 +64,7 @@
     if (emailErrors.value.length > 0 || passwordErrors.value.length > 0) {
       return
     }
+
     //router.push({ name: 'dashboard' }) //这个直接转到dashboard页面 ==》http://127.0.0.1:1111/admin/dashboard
 
     var params = {
@@ -72,8 +73,6 @@
     }
 
     try {
-      console.log('开始请求。。。', this)
-
       //const response = await axios.post(import.meta.env.VITE_BACKEND_VIP_DOMAIN + '/login', params)
       //const response = await myAxios.post('/login', params)
       const response = await httpPost('/login', params)

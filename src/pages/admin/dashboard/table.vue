@@ -32,6 +32,7 @@
   import { onMounted, ref } from 'vue'
   import { useI18n } from 'vue-i18n'
   import axios from 'axios'
+  import { httpGet, httpPost } from '@api'
 
   const { t } = useI18n()
   var params = {
@@ -49,7 +50,7 @@
   onMounted(async () => {
     try {
       console.log(111)
-      const response = await axios.get('https://reqres.in/api/users', { params })
+      const response = await httpGet('https://reqres.in/api/users', { params })
       users.value = response.data.data
       console.log(response.data.data)
     } catch (error) {
