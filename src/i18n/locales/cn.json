@@ -261,6 +261,7 @@
     "title": "进度条"
   },
   "tables": {
+    "search": "表格查询",
     "basic": "基本表格",
     "styled": "颜色，图标，标签",
     "advanced": "搜索和分页",
@@ -320,5 +321,11 @@
       "action1": "行为 1",
       "action2": "行为 2"
     }
+  },
+  "userSearch": {
+    "username": "用户名",
+    "createTime": "创建时间",
+    "age": "年龄"
   }
+
 }

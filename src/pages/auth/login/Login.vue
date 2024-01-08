@@ -36,12 +36,12 @@
   import { useRouter } from 'vue-router'
   import { useI18n } from 'vue-i18n'
   import axios from 'axios' //原始用法
-  import createAxiosInstance from '../../../axiosplugin/axiosPlugin' // 根据你的项目目录结构调整路径
-  const myAxios = createAxiosInstance() //插件用法，但是头部不能带信息，头部一旦修改里面默认信息会丢失
-
-  //import { httpGet, httpPost } from  '../../../api';//公共请求方法的方式，不能带头部信息，但是可以做请求参数的添加，暂时使用这种方式
   import { httpGet, httpPost } from '@api'
+  import md5 from 'crypto-js/md5'
+
   const { t } = useI18n()
+  localStorage.removeItem('token')
+  localStorage.clear()
 
   const email = ref('')
   const password = ref('')
@@ -50,10 +50,10 @@
   const passwordErrors = ref<string[]>([])
   const router = useRouter()
 
-  const formReady = computed(() => !emailErrors.value.length && !passwordErrors.value.length)
+  //const formReady = computed(() => !emailErrors.value.length && !passwordErrors.value.length)
 
   async function onsubmit() {
-    if (!formReady.value) return
+    //if (!formReady.value) return
     console.log('email:', email.value)
     console.log('password:', password.value)
     console.log('4--' + import.meta.env.VITE_BACKEND_VIP_DOMAIN)
@@ -68,19 +68,31 @@
     //router.push({ name: 'dashboard' }) //这个直接转到dashboard页面 ==》http://127.0.0.1:1111/admin/dashboard
 
     var params = {
-      username: email.value,
+      name: email.value,
       password: password.value,
     }
 
+    var encryptedText = md5(params.password).toString()
+    params.password = encryptedText
+    console.log('password2:', encryptedText)
+
     try {
       //const response = await axios.post(import.meta.env.VITE_BACKEND_VIP_DOMAIN + '/login', params)
-      //const response = await myAxios.post('/login', params)
-      const response = await httpPost('/login', params)
+      const response = await axios.post(import.meta.env.VITE_BACKEND_VIP_DOMAIN + '/login', params)
       console.log('请求完成')
-      console.log(response.data.token)
-      // 存储token
-      localStorage.setItem('token', response.data.token)
+      console.log('response.data', response.data)
 
+      if (response.data.code != 10000) {
+        emailErrors.value = [response.data.message]
+        passwordErrors.value = [response.data.message]
+        return
+      }
+      console.log(response.data.data.token)
+
+      // 存储token
+      localStorage.setItem('token', response.data.data.token)
+      localStorage.setItem('uid', response.data.data.uid)
+      router.push({ name: 'dashboard' })
       // 处理成功后的逻辑
     } catch (error) {
       console.error('Error:', error)

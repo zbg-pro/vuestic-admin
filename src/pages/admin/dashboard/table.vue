@@ -1,5 +1,18 @@
 <template>
   <va-card class="markup-tables mb-8">
+    <va-card class="col-span-12">
+      <va-card-title>{{ t('tables.search') }}</va-card-title>
+      <va-card-content>
+        <form>
+          <div class="grid grid-cols-12 gap-6">
+            <div class="flex md:col-span-4 sm:col-span-6 col-span-12">
+              <va-input v-model="simple" :placeholder="t('userSearch.username')" />
+              <va-button style="margin-right: 0" small @click="onsubmit"> search </va-button>
+            </div>
+          </div>
+        </form>
+      </va-card-content>
+    </va-card>
     <va-card-title>{{ t('tables.basic') }}</va-card-title>
     <va-card-content class="overflow-auto">
       <table class="va-table w-full">
@@ -11,13 +24,6 @@
         </thead>
 
         <tbody>
-          <!--        <tr>
-          <td>zhang三</td><td>12</td>
-        </tr>
-        <tr>
-          <td>李四</td><td>22</td>
-        </tr>-->
-
           <tr v-for="user in users" :key="user.id">
             <td>{{ user.first_name }}</td>
             <td>{{ user.email }}</td>
@@ -35,21 +41,15 @@
   import { httpGet, httpPost } from '@api'
 
   const { t } = useI18n()
+  const simple = ref('')
   var params = {
     per_page: 10,
     page: 1,
   }
 
-  console.log('1--' + import.meta.env.VITE_APP_GTM_KEY1)
-  console.log('2--' + import.meta.env.DEV)
-  console.log('3--' + import.meta.env.VITE_BACKEND_API_DOMAIN)
-  console.log('4--' + import.meta.env.VITE_BACKEND_VIP_DOMAIN)
-
-  console.log(222)
   var users = ref([])
   onMounted(async () => {
     try {
-      console.log(111)
       const response = await httpGet('https://reqres.in/api/users', { params })
       users.value = response.data.data
       console.log(response.data.data)
@@ -57,4 +57,8 @@
       console.error('Error fetching data:', error)
     }
   })
+
+  async function onsubmit() {
+    alert(1)
+  }
 </script>

@@ -506,5 +506,10 @@
       "action1": "اقدام یک",
       "action2": "اقدام دو"
     }
+  },
+  "userSearch": {
+    "username": "username",
+    "createTime": "crate time",
+    "age": "age"
   }
 }

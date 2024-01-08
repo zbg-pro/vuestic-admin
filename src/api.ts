@@ -4,7 +4,7 @@ const baseURL = import.meta.env.VITE_BACKEND_VIP_DOMAIN
 
 const axiosInstance: AxiosInstance = axios.create({
   baseURL,
-  timeout: 5000,
+  timeout: 20000,
 })
 
 /*// 请求拦截器，添加 Token 和其他自定义请求头

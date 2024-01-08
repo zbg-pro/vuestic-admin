@@ -218,6 +218,7 @@
     "notifications": "Notificaciones"
   },
   "tables": {
+    "search": "table search",
     "basic": "Tabla basica",
     "stripedHoverable": "Rayado, Hoverable",
     "labelsActions": "Etiquetas, Acciones como Botones",
@@ -254,5 +255,10 @@
     "language": "Cambiar Idioma",
     "profile": "Mi Perfil",
     "logout": "Cerrar Sesión"
+  },
+  "userSearch": {
+    "username": "username",
+    "createTime": "crate time",
+    "age": "age"
   }
 }
