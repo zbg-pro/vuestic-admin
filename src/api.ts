@@ -57,10 +57,24 @@ export async function httpPost<T>(url: string, data: any): Promise<AxiosResponse
     ...axiosInstance.defaults.headers,  // 复制原有的请求头信息
     ...customHeaders,                    // 添加额外的请求头信息
   };*/
+  const token = localStorage.getItem('token')
+  if (token) {
+    const separator = url.includes('?') ? '&' : '?'
+    // Append the token parameter to the URL
+    url = url + separator + 'token=' + token
+  }
+
   return axiosInstance.post<T>(url, data /*, { headers: mergedHeaders }*/)
 }
 
 // 公共的 HTTP GET 方法，可以在这里追加自定义头部
 export async function httpGet<T>(url: string, data: any): Promise<AxiosResponse<T>> {
+  const token = localStorage.getItem('token')
+
+  if (!data) {
+    data = { params: {} }
+  }
+  data.params.token = token
+  console.log('data:', data)
   return axiosInstance.get<T>(url, data)
 }

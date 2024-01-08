@@ -25,8 +25,8 @@
 
         <tbody>
           <tr v-for="user in users" :key="user.id">
-            <td>{{ user.first_name }}</td>
-            <td>{{ user.email }}</td>
+            <td>{{ user.name }}</td>
+            <td>{{ user.age }}</td>
           </tr>
         </tbody>
       </table>
@@ -43,14 +43,14 @@
   const { t } = useI18n()
   const simple = ref('')
   var params = {
-    per_page: 10,
-    page: 1,
+    /*per_page: 10,
+    page: 1,*/
   }
 
   var users = ref([])
   onMounted(async () => {
     try {
-      const response = await httpGet('https://reqres.in/api/users', { params })
+      const response = await httpPost('/queryUser')
       users.value = response.data.data
       console.log(response.data.data)
     } catch (error) {
