@@ -44,7 +44,7 @@
 
   <!--:hideDefaultActions="true"-->
   <!--@close="closeUserFormModal1" 当要监听关闭时候可以使用-->
-  <va-modal v-model="isUserFormModalOpen" @ok="submitUserForm">
+  <va-modal v-model="isUserFormModalOpen" class="modal-crud" @ok="submitUserForm">
     <user-form v-model:user="user" :initial-user="selectedUser" />
   </va-modal>
 </template>
