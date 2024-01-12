@@ -23,6 +23,7 @@
     "@amcharts/amcharts5-geodata": "^5.0.3",
     "@fortawesome/fontawesome-free": "^6.1.1",
     "@gtm-support/vue-gtm": "^2.0.0",
+    "@vuepic/vue-datepicker": "^7.4.1",
     "axios": "^1.6.0",
     "chart.js": "^3.8.0",
     "crypto-js": "^4.2.0",
@@ -42,6 +43,7 @@
     "vue-i18n": "^9.1.10",
     "vue-router": "^4.2.4",
     "vue-yandex-maps": "^0.12.3",
+    "vue3-datepicker": "^0.4.0",
     "vuestic-ui": "^1.7.3"
   },
   "devDependencies": {

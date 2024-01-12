@@ -72,9 +72,9 @@ export async function httpGet<T>(url: string, data: any): Promise<AxiosResponse<
   const token = localStorage.getItem('token')
 
   if (!data) {
-    data = { params: {} }
+    data = {}
   }
-  data.params.token = token
+  data.token = token
   console.log('data:', data)
   return axiosInstance.get<T>(url, data)
 }
